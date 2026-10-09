@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://krewflo.com/sitemap.xml
