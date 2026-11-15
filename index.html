@@ -213,6 +213,13 @@ a:hover { color: #9E3E15; }
 .tab { display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 22px; border-radius: 14px; cursor: pointer; font-size: 17px; font-weight: 600; background: #FFFFFF; color: #111C24; border: 2px solid #C9C3B7; box-shadow: 0 3px 0 #C9C3B7; }
 .tab.is-on { background: #B94A1B; color: #FFFFFF; border-color: #9E3E15; box-shadow: 0 3px 0 #9E3E15; }
 .tab svg { flex: none; }
+.tab.is-soon, .tab.is-soon:hover { background: #EFECE6; color: #8C8A85; border-color: #DCD7CD; box-shadow: none; cursor: not-allowed; transform: none; }
+.tab.is-soon svg { opacity: .55; }
+.soon-tag { display: block; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #8C8A85; margin-top: 2px; }
+.bot-row.is-soon, .bot-row.is-soon:hover { background: #F3F1EC; color: #8C8A85; border-color: #E0DBD1; box-shadow: none; cursor: default; transform: none; }
+.bot-row.is-soon .play-dot { background: #D9D4CA; color: #FFFFFF; }
+.bot-row.is-soon .bot-row-status, .bot-row.is-soon .bot-row-status-m { color: #8C8A85; font-style: normal; }
+.phone-screen.no-video .player-bar, .phone-screen.no-video .sound-pill { display: none; }
 .bots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 32px; align-items: start; }
 .bot-list { display: flex; flex-direction: column; gap: 12px; }
 .bot-row { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 16px 18px; border-radius: 16px; cursor: pointer; background: #FFFFFF; color: #111C24; border: 2px solid #C9C3B7; box-shadow: 0 3px 0 #C9C3B7; }
@@ -606,7 +613,7 @@ a:hover { color: #9E3E15; }
             <div class="vid-placeholder" id="vid-placeholder">
               <div class="vid-ph-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#E07A4A" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></div>
               <div class="vid-ph-name" id="vid-ph-name">CRM Assistant</div>
-              <div class="vid-ph-label">DEMO VIDEO GOES HERE</div>
+              <div class="vid-ph-label">VIDEO COMING SOON</div>
             </div>
             <button type="button" class="sound-pill" id="sound-pill" aria-pressed="false">
               <svg class="icon-muted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z"></path><path d="M22 9l-6 6M16 9l6 6"></path></svg>
@@ -810,9 +817,9 @@ a:hover { color: #9E3E15; }
     store: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9z"></path><path d="M5 9v11h14V9"></path><path d="M10 20v-6h4v6"></path></svg>'
   };
 
-  var MTA = { name: 'Meeting-to-Action', line: 'Granola notes in, tasks and follow-ups out.',
+  var MTA = { soon: true, name: 'Meeting-to-Action', line: 'Granola notes in, tasks and follow-ups out.',
     does: ['Reads your Granola meeting notes when the call ends', 'Pulls out next steps and adds them to your task list', 'Drafts the follow-up email for you to review'] };
-  var BRIEF = { name: 'Daily Briefing', line: 'One message each morning with what matters today.',
+  var BRIEF = { soon: true, name: 'Daily Briefing', line: 'One message each morning with what matters today.',
     does: ['Checks your calendar, inbox, and CRM overnight', 'Sends one morning summary: today, follow-ups, loose ends', 'Flags anything that’s been sitting too long'] };
   var TABS = [
     { id: 're', label: 'Real estate', icon: 'house', products: [
@@ -821,7 +828,7 @@ a:hover { color: #9E3E15; }
     { id: 'trades', label: 'Contractors', icon: 'tools', products: [
       { name: 'Inspection-to-Proposal', line: 'Your walkthrough becomes a report and a bid.', video: true,
         does: ['Turns your on-site talk-through and photos into a report', 'Adds recommendations and pricing from your price sheet', 'Hands you a PDF and an email draft to send yourself'] } ] },
-    { id: 'all', label: 'Every business', icon: 'store', products: [ MTA, BRIEF,
+    { id: 'all', soon: true, label: 'Every business', icon: 'store', products: [ MTA, BRIEF,
       { name: 'Your own bot', line: 'A task you’d love to hand off, built for your tools.',
         does: ['We pick a task you repeat every week', 'I build a bot around the tools you already use', 'You test it, tweak it, and approve what it sends'] } ] }
   ];
@@ -851,6 +858,7 @@ a:hover { color: #9E3E15; }
     el.innerHTML = TABS.map(function (t) {
       var on = t.id === state.tab ? ' is-on' : '';
       var pressed = t.id === state.tab ? 'true' : 'false';
+      if (t.soon) return '<button type="button" class="tab is-soon" disabled aria-disabled="true">' + ICONS[t.icon] + '<span>' + t.label + '<span class="soon-tag">Coming soon</span></span></button>';
       return '<button type="button" class="tab' + on + '" data-tab="' + t.id + '" aria-pressed="' + pressed + '">' + ICONS[t.icon] + '<span>' + t.label + '</span></button>';
     }).join('');
   }
@@ -861,6 +869,10 @@ a:hover { color: #9E3E15; }
     var el = document.getElementById('bot-rows');
     el.innerHTML = tab.products.map(function (p, i) {
       var on = i === idx;
+      if (p.soon) return '<div class="bot-row is-soon" aria-disabled="true">' +
+        '<span class="play-dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span>' +
+        '<span class="bot-row-text"><span class="bot-row-name">' + p.name + '</span><span class="bot-row-line">' + p.line + '</span><span class="bot-row-status-m">Coming soon</span></span>' +
+        '<span class="bot-row-status">Coming soon</span></div>';
       var label = on ? 'Now playing' : 'Watch ›';
       var labelM = on ? 'Now playing ↓' : 'Watch ›';
       return '<button type="button" class="bot-row' + (on ? ' is-on' : '') + '" data-prod="' + i + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
@@ -930,6 +942,7 @@ a:hover { color: #9E3E15; }
     hasVideo = !!p.video;
     if (hasVideo) {
       placeholder.style.display = 'none';
+      document.getElementById('phone-screen').classList.remove('no-video');
       poster.style.display = 'none';
       video.style.display = 'block';
       video.muted = true;
@@ -943,10 +956,11 @@ a:hover { color: #9E3E15; }
       video.style.display = 'none';
       poster.style.display = 'none';
       placeholder.style.display = 'flex';
-      seekFill.style.width = '30%';
-      playerTime.textContent = '0:16 / 0:55';
-      btnPlay.classList.remove('is-paused');
-      btnPlay.setAttribute('aria-label', 'Pause');
+      document.getElementById('phone-screen').classList.add('no-video');
+      seekFill.style.width = '0%';
+      playerTime.textContent = '0:00 / 0:00';
+      btnPlay.classList.add('is-paused');
+      btnPlay.setAttribute('aria-label', 'Play');
       setMuted(true);
     }
   }
