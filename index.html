@@ -244,9 +244,11 @@ a:hover { color: #9E3E15; }
 .sound-pill .icon-sound { display: none; }
 .sound-pill.is-on .icon-muted { display: none; }
 .sound-pill.is-on .icon-sound { display: block; }
-.player-bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 10px 14px; background: rgba(17, 28, 36, 0.88); display: flex; flex-direction: column; gap: 4px; z-index: 2; }
-.seek { height: 4px; border-radius: 4px; background: rgba(246, 244, 239, 0.3); position: relative; cursor: pointer; }
-.seek-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; border-radius: 4px; background: #E07A4A; pointer-events: none; }
+.player-bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 10px 12px; background: rgba(17, 28, 36, 0.88); display: flex; flex-direction: column; gap: 2px; z-index: 2; }
+.seek { height: 44px; position: relative; cursor: pointer; touch-action: none; -webkit-user-select: none; user-select: none; }
+.seek-track { position: absolute; left: 12px; right: 12px; top: 50%; height: 10px; margin-top: -5px; border-radius: 10px; background: rgba(246, 244, 239, 0.3); pointer-events: none; }
+.seek-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; border-radius: 10px; background: #E07A4A; pointer-events: none; }
+.seek-thumb { position: absolute; top: 50%; left: 12px; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.35); pointer-events: none; z-index: 1; }
 .player-row { display: flex; align-items: center; color: #FFFFFF; }
 .player-row button { width: 40px; height: 40px; border: 0; background: transparent; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex: none; }
 .player-row button.btn-playpause { width: 40px; height: 40px; border-radius: 50%; background: #B94A1B; }
@@ -261,6 +263,12 @@ a:hover { color: #9E3E15; }
 .bot-does { display: flex; flex-direction: column; gap: 18px; padding-top: 36px; }
 .bot-does .eyebrow { color: #B94A1B; font-size: 12px; }
 .bot-does h3 { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.02em; }
+.bot-tagline { margin: 0; font-size: 18px; line-height: 1.45; color: #3A4650; }
+.bot-asks { display: flex; flex-direction: column; gap: 8px; }
+.bot-asks[hidden], .bot-tagline[hidden], .control-note[hidden] { display: none !important; }
+.bot-asks-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: #8C8A85; }
+.bot-asks-list { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.bot-ask { max-width: 92%; background: #E8E6E1; color: #111C24; border-radius: 18px 18px 4px 18px; padding: 10px 14px; font-size: 15px; line-height: 1.4; text-align: left; }
 .check-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 17px; line-height: 1.5; color: #3A4650; }
 .check-list li { display: flex; gap: 10px; }
 .check { color: #1D6A55; font-weight: 700; flex: none; }
@@ -289,7 +297,9 @@ a:hover { color: #9E3E15; }
 .way .check-list { gap: 10px; font-size: 15px; line-height: 1.45; color: inherit; }
 .way-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid #E3DFD6; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
 .way-build .way-foot { border-top-color: #3A4650; }
-.way-price { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; }
+.way-price { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; line-height: 1.2; }
+.way-price-note { display: block; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 13px; font-weight: 600; margin-top: 3px; color: #3A4650; }
+.way-build .way-price-note { color: #CFC9BD; }
 
 /* About */
 #about { background: #FFFFFF; border-top: 1px solid #E3DFD6; border-bottom: 1px solid #E3DFD6; }
@@ -331,6 +341,7 @@ a:hover { color: #9E3E15; }
 .btn-send:hover { color: #FFFFFF; }
 .btn-send:disabled { opacity: 0.7; cursor: default; }
 .btn-get, .btn-pick { align-self: flex-start; }
+.btn-get { white-space: normal; line-height: 1.25; height: auto; min-height: 52px; padding: 12px 22px; text-align: center; }
 .form-privacy { display: flex; gap: 8px; font-size: 13px; line-height: 1.5; color: #5E6A73; }
 .form-privacy svg { flex: none; margin-top: 2px; }
 .form-error { margin: 0; font-size: 14px; color: #B94A1B; }
@@ -438,11 +449,15 @@ a:hover { color: #9E3E15; }
   .vid-ph-icon { width: 56px; height: 56px; border-radius: 16px; }
   .vid-ph-name { font-size: 20px; }
   .sound-pill { top: 16px; }
-  .player-bar { padding: 10px 8px 14px; }
+  .player-bar { padding: 4px 8px 12px; }
   .bot-does { gap: 16px; padding-top: 0; }
   .bot-does h3 { font-size: 26px; }
+  .bot-tagline { font-size: 16px; }
+  .bot-asks { gap: 6px; }
+  .bot-asks-list { gap: 6px; }
+  .bot-ask { max-width: 88%; font-size: 14px; padding: 8px 12px; }
   .control-note { padding: 16px; }
-  .btn-get { width: 100%; height: 56px; font-size: 17px; }
+  .btn-get { width: 100%; min-height: 56px; height: auto; font-size: 16px; }
 
   #ways { padding: 56px 20px; gap: 20px; }
   .ways-intro { gap: 12px; }
@@ -503,6 +518,13 @@ a:hover { color: #9E3E15; }
   .footer-note { font-size: 16px; }
   .footer-nav-d, .footer-contact-d { display: none; }
   .footer-contact-m, .footer-nav-m { display: flex; flex-direction: column; }
+
+  /* Phone only: bot library first, then Here’s how it works. Desktop order unchanged. */
+  .hero-bots { display: flex; flex-direction: column; }
+  .hero { display: contents; }
+  .hero-copy { order: 1; padding: 36px 20px 32px; }
+  #bots { order: 2; }
+  .how-card { order: 3; margin: 24px 20px 48px; }
   .footer-contact-m { gap: 0; }
   .footer-contact-m .footer-kicker { padding-bottom: 6px; }
   .contact-row { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 16px; border-radius: 12px; background: #1A242C; color: #F6F4EF; text-decoration: none; font-size: 16px; margin-bottom: 8px; }
@@ -679,6 +701,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
   </nav>
 </header>
 
+<div class="hero-bots">
 <section class="hero">
   <div class="hero-copy">
     <div class="eyebrow">AI EDUCATION + AUTOMATION FOR SMALL BUSINESS</div>
@@ -705,7 +728,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
     </div>
     <div class="how-step is-last">
       <span class="how-num">3</span>
-      <span><strong>Learn it, or let me build it</strong><span>Run with it yourself, or I set it all up for you.</span></span>
+      <span><strong>I build it for you</strong><span>Bots custom-fit to your business.</span></span>
     </div>
     <div class="how-me">
       <img src="/assets/ethan.jpg" alt="Ethan Peralta" width="52" height="52">
@@ -745,7 +768,10 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
               <span id="sound-label">Tap for sound</span>
             </button>
             <div class="player-bar">
-              <div class="seek" id="seek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0"><div class="seek-fill" id="seek-fill"></div></div>
+              <div class="seek" id="seek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0">
+                <div class="seek-track"><div class="seek-fill" id="seek-fill"></div></div>
+                <div class="seek-thumb" id="seek-thumb"></div>
+              </div>
               <div class="player-row">
                 <button type="button" class="btn-playpause is-paused" id="btn-play" aria-label="Play"><svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg><svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></button>
                 <button type="button" id="btn-back" aria-label="Back 10 seconds"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path></svg></button>
@@ -760,13 +786,19 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
       <div class="bot-does">
         <div class="eyebrow">WHAT IT DOES</div>
         <h3 id="bot-name">CRM Assistant</h3>
+        <p class="bot-tagline" id="bot-tagline" hidden></p>
         <ul class="check-list" id="bot-does"></ul>
-        <div class="control-note"><strong>You stay in control.</strong> It drafts. You approve before anything reaches a client.</div>
-        <a class="btn btn-primary btn-card btn-shadow btn-get" href="#demo">Get this bot</a>
+        <div class="bot-asks" id="bot-asks" hidden>
+          <div class="bot-asks-label">JUST ASK YOUR ASSISTANT…</div>
+          <div class="bot-asks-list" id="bot-asks-list"></div>
+        </div>
+        <div class="control-note" id="control-note"></div>
+        <a class="btn btn-primary btn-card btn-shadow btn-get" href="#demo">See It Work for Your Business</a>
       </div>
     </div>
   </div>
 </section>
+</div>
 
 <section id="ways">
   <div class="ways-intro">
@@ -778,24 +810,23 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
     <div class="way way-learn">
       <div class="way-top"><span class="way-kicker">01 · LEARN</span><span class="way-badge">Start here</span></div>
       <h3>AI Education</h3>
-      <p>One-on-one with the owner, or a hands-on workshop with your team.</p>
+      <p>One-on-one with the owner or manager, or a hands-on workshop with your team.</p>
       <ul class="check-list">
-        <li><span class="check">✓</span>What AI can (and can’t) do for your business</li>
-        <li><span class="check">✓</span>Live demos of bots I’ve built</li>
-        <li><span class="check">✓</span>Map the tasks worth automating</li>
-        <li><span class="check">✓</span>A take-home playbook to start on your own</li>
+        <li><span class="check">✓</span>Understand what AI can (and can’t) do for your business</li>
+        <li><span class="check">✓</span>Discover tools that save time on everyday tasks</li>
+        <li><span class="check">✓</span>Get hands-on with AI tools</li>
+        <li><span class="check">✓</span>See live demos of custom AI assistants</li>
       </ul>
-      <div class="way-foot"><span class="way-price">$200/hr</span><a class="btn btn-primary btn-way btn-shadow" href="#demo">Book a session</a></div>
+      <div class="way-foot"><span class="way-price">$200/hr<span class="way-price-note">2-hour minimum</span></span><a class="btn btn-primary btn-way btn-shadow" href="#demo">Book a session</a></div>
     </div>
     <div class="way way-launch">
       <span class="way-kicker">02 · LAUNCH</span>
       <h3>Ready-made bots</h3>
       <p>Pick a Krewflo bot from the library. I set it up on your tools and shape it to how you work.</p>
       <ul class="check-list">
-        <li><span class="check">✓</span>CRM Assistant and Inspection-to-Proposal, with more coming soon</li>
+        <li><span class="check">✓</span>CRM Assistant and Scheduling Assistant, with more coming soon</li>
         <li><span class="check">✓</span>Connected to the tools you already use</li>
         <li><span class="check">✓</span>A walkthrough so your team knows how to use it</li>
-        <li><span class="check">✓</span>You approve anything before it goes out</li>
       </ul>
       <div class="way-foot"><span class="way-price">Priced per bot</span><a class="btn btn-secondary btn-way" href="#bots">See the bots</a></div>
     </div>
@@ -804,10 +835,10 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
       <h3>Custom AI crew</h3>
       <p>I get into the details of your business and build agents around the way it runs.</p>
       <ul class="check-list">
-        <li><span class="check check-on-dark">✓</span>A deep-dive on your workflows with you and your team</li>
-        <li><span class="check check-on-dark">✓</span>One custom agent, or a crew that works together</li>
-        <li><span class="check check-on-dark">✓</span>Wired into your CRM, email, calendar, and docs</li>
-        <li><span class="check check-on-dark">✓</span>Ongoing tune-ups as your business changes</li>
+        <li><span class="check check-on-dark">✓</span>A deep-dive on your systems and processes with you and your team</li>
+        <li><span class="check check-on-dark">✓</span>One custom agent, or a “Krew” that works together</li>
+        <li><span class="check check-on-dark">✓</span>Connected to your CRM, email, calendar, docs, and other programs</li>
+        <li><span class="check check-on-dark">✓</span>Ongoing tune-ups available as your business changes</li>
       </ul>
       <div class="way-foot"><span class="way-price">Starts at $5,000</span><a class="btn btn-light btn-way" href="#demo">Talk it through</a></div>
     </div>
@@ -852,7 +883,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
       <ul class="check-list">
         <li><span class="check check-demo">✓</span>A look at the tasks that eat up your week</li>
         <li><span class="check check-demo">✓</span>Live demos of bots that fit your business</li>
-        <li><span class="check check-demo">✓</span>A clear next step: learn it, launch it, or build it</li>
+        <li><span class="check check-demo">✓</span>A clear next step: learn it and launch it</li>
       </ul>
       <a class="btn btn-primary btn-hero btn-shadow btn-pick" href="https://calendar.app.google/w4Ni5EzH1D1n6JXE9" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>Pick a time for your demo</a>
     </div>
@@ -943,20 +974,30 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
     store: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9z"></path><path d="M5 9v11h14V9"></path><path d="M10 20v-6h4v6"></path></svg>'
   };
 
-  var MTA = { soon: true, name: 'Meeting-to-Action', line: 'Granola notes in, tasks and follow-ups out.',
-    does: ['Reads your Granola meeting notes when the call ends', 'Pulls out next steps and adds them to your task list', 'Drafts the follow-up email for you to review'] };
+  var NOTE_DEFAULT = '<strong>You stay in control.</strong> It drafts. You approve before anything reaches a client.';
+  var CRM = { name: 'CRM Assistant', line: 'Keeps your CRM current without the data entry.',
+    tagline: 'Your client database, one message away.',
+    does: ['Find contacts and client information instantly', 'Add new contacts and update existing records', 'Search your database using everyday language', 'Draft individual or group emails'],
+    note: '<strong>You stay in control.</strong> Your assistant handles the busywork while you focus on your clients.',
+    asks: ['What are my notes on Jake from State Farm?', 'Add Joseph Smith as a new client.', 'Which of my clients want a pool?', 'Draft an email to all this month’s buyers.'] };
+  var SCHED = { name: 'Scheduling Assistant', line: 'Books, moves, and reminds without the back-and-forth.',
+    tagline: 'Your calendar, handled.',
+    does: ['Schedule meetings and appointments', 'Send calendar invitations', 'Reschedule existing events', 'Create reminders and keep track of your day'],
+    note: '<strong>Just say the word.</strong> Your assistant takes care of the scheduling so you don’t have to.',
+    asks: ['Remind me to meet Joseph Tuesday at 10:30.', 'Schedule coffee with Jessie Friday at 9 and invite him.', 'Move my coffee meeting with Jessie to Monday at 9.'] };
   var BRIEF = { soon: true, name: 'Daily Briefing', line: 'One message each morning with what matters today.',
-    does: ['Checks your calendar, inbox, and CRM overnight', 'Sends one morning summary: today, follow-ups, loose ends', 'Flags anything that’s been sitting too long'] };
+    does: ['Checks your calendar, inbox, and CRM overnight', 'Sends one morning summary: today, follow-ups, loose ends', 'Flags anything that’s been sitting too long'],
+    note: NOTE_DEFAULT };
   var TABS = [
-    { id: 're', label: 'Real estate', icon: 'house', products: [
-      { name: 'CRM Assistant', line: 'Keeps your CRM current without the data entry.',
-        does: ['Logs calls and notes to the right contact', 'Updates deal stages as things change', 'Drafts follow-ups for leads going quiet'] }, MTA, BRIEF ] },
+    { id: 're', label: 'Real estate', icon: 'house', products: [ CRM, SCHED, BRIEF ] },
     { id: 'trades', label: 'Contractors', icon: 'tools', products: [
       { name: 'Inspection-to-Proposal', line: 'Your walkthrough becomes a report and a bid.', video: true,
-        does: ['Turns your on-site talk-through and photos into a report', 'Adds recommendations and pricing from your price sheet', 'Hands you a PDF and an email draft to send yourself'] } ] },
-    { id: 'all', soon: true, label: 'Every business', icon: 'store', products: [ MTA, BRIEF,
+        does: ['Turns your on-site talk-through and photos into a report', 'Adds recommendations and pricing from your price sheet', 'Hands you a PDF and an email draft to send yourself'],
+        note: NOTE_DEFAULT } ] },
+    { id: 'all', soon: true, label: 'Every business', icon: 'store', products: [ BRIEF,
       { name: 'Your own bot', line: 'A task you’d love to hand off, built for your tools.',
-        does: ['We pick a task you repeat every week', 'I build a bot around the tools you already use', 'You test it, tweak it, and approve what it sends'] } ] }
+        does: ['We pick a task you repeat every week', 'I build a bot around the tools you already use', 'You test it, tweak it, and approve what it sends'],
+        note: NOTE_DEFAULT } ] }
   ];
   var FAQS = [
     ['Do I need to be good with technology?', 'No. If you can send a text or an email, you can do this. I set everything up, walk you through it step by step, and I’m a phone call away if you get stuck.'],
@@ -1008,13 +1049,43 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
     }).join('');
   }
 
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
   function renderDoes() {
     var p = currentProduct();
     document.getElementById('bot-name').textContent = p.name;
     document.getElementById('vid-ph-name').textContent = p.name;
+    var tag = document.getElementById('bot-tagline');
+    if (p.tagline) {
+      tag.textContent = p.tagline;
+      tag.hidden = false;
+    } else {
+      tag.textContent = '';
+      tag.hidden = true;
+    }
     document.getElementById('bot-does').innerHTML = p.does.map(function (d) {
-      return '<li><span class="check">✓</span><span>' + d + '</span></li>';
+      return '<li><span class="check">✓</span><span>' + esc(d) + '</span></li>';
     }).join('');
+    var asksWrap = document.getElementById('bot-asks');
+    var asksList = document.getElementById('bot-asks-list');
+    if (p.asks && p.asks.length) {
+      asksList.innerHTML = p.asks.map(function (a) {
+        return '<div class="bot-ask">' + esc(a) + '</div>';
+      }).join('');
+      asksWrap.hidden = false;
+    } else {
+      asksList.innerHTML = '';
+      asksWrap.hidden = true;
+    }
+    var note = document.getElementById('control-note');
+    if (p.note) {
+      note.innerHTML = p.note;
+      note.hidden = false;
+    } else {
+      note.innerHTML = '';
+      note.hidden = true;
+    }
   }
 
   var video = document.getElementById('bot-video');
@@ -1028,9 +1099,11 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
   var btnFull = document.getElementById('btn-full');
   var seek = document.getElementById('seek');
   var seekFill = document.getElementById('seek-fill');
+  var seekThumb = document.getElementById('seek-thumb');
   var playerTime = document.getElementById('player-time');
   var hasVideo = false;
   var seeking = false;
+  var SEEK_PAD = 12;
 
   function fmt(t) {
     if (!isFinite(t) || t < 0) t = 0;
@@ -1057,7 +1130,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
   function syncTime() {
     var dur = video.duration || 55;
     var cur = video.currentTime || 0;
-    if (!seeking) seekFill.style.width = (dur ? (cur / dur) * 100 : 0) + '%';
+    if (!seeking) setSeekRatio(dur ? (cur / dur) : 0);
     playerTime.textContent = fmt(cur) + ' / ' + fmt(dur);
     seek.setAttribute('aria-valuenow', String(Math.floor(cur)));
     seek.setAttribute('aria-valuemax', String(Math.floor(dur) || 55));
@@ -1083,7 +1156,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
       poster.style.display = 'none';
       placeholder.style.display = 'flex';
       document.getElementById('phone-screen').classList.add('no-video');
-      seekFill.style.width = '0%';
+      setSeekRatio(0);
       playerTime.textContent = '0:00 / 0:00';
       btnPlay.classList.add('is-paused');
       btnPlay.setAttribute('aria-label', 'Play');
@@ -1146,30 +1219,35 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
     else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
   });
 
+  function setSeekRatio(ratio) {
+    ratio = Math.min(1, Math.max(0, ratio));
+    seekFill.style.width = (ratio * 100) + '%';
+    var rect = seek.getBoundingClientRect();
+    var width = Math.max(1, rect.width - SEEK_PAD * 2);
+    seekThumb.style.left = (SEEK_PAD + ratio * width) + 'px';
+  }
   function seekTo(clientX) {
     var rect = seek.getBoundingClientRect();
-    var ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    var width = Math.max(1, rect.width - SEEK_PAD * 2);
+    var ratio = Math.min(1, Math.max(0, (clientX - rect.left - SEEK_PAD) / width));
     var dur = video.duration || 55;
     if (hasVideo) video.currentTime = ratio * dur;
-    seekFill.style.width = (ratio * 100) + '%';
+    setSeekRatio(ratio);
   }
-  seek.addEventListener('mousedown', function (e) {
+  function endSeek() { seeking = false; }
+  seek.addEventListener('pointerdown', function (e) {
     if (!hasVideo) return;
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
     seeking = true;
+    try { seek.setPointerCapture(e.pointerId); } catch (err) {}
     seekTo(e.clientX);
     e.preventDefault();
   });
-  window.addEventListener('mousemove', function (e) { if (seeking) seekTo(e.clientX); });
-  window.addEventListener('mouseup', function () { seeking = false; });
-  seek.addEventListener('touchstart', function (e) {
-    if (!hasVideo) return;
-    seeking = true;
-    seekTo(e.touches[0].clientX);
-  }, { passive: true });
-  window.addEventListener('touchmove', function (e) {
-    if (seeking) seekTo(e.touches[0].clientX);
-  }, { passive: true });
-  window.addEventListener('touchend', function () { seeking = false; });
+  seek.addEventListener('pointermove', function (e) {
+    if (seeking) seekTo(e.clientX);
+  });
+  seek.addEventListener('pointerup', endSeek);
+  seek.addEventListener('pointercancel', endSeek);
 
   /* FAQ */
   var faqList = document.getElementById('faq-list');
