@@ -175,6 +175,10 @@ a:hover { color: #9E3E15; }
 .btn-hero { height: 56px; padding: 0 28px; border-radius: 14px; font-size: 17px; }
 .btn-hero-alt { height: 56px; padding: 0 24px; border-radius: 14px; font-size: 17px; }
 .btn-card { height: 52px; padding: 0 24px; border-radius: 14px; font-size: 16px; }
+.btn-go { background: #1D6A55; color: #FFFFFF; box-shadow: 0 3px 0 #134B3C; }
+.btn-go:hover { color: #FFFFFF; }
+.btn-gold { background: #E3B04B; color: #111C24; box-shadow: 0 3px 0 #A97F2C; }
+.btn-gold:hover { color: #111C24; }
 .btn-way { height: 48px; padding: 0 20px; border-radius: 12px; font-size: 15px; white-space: nowrap; }
 .btn-menu { width: 44px; height: 44px; border-radius: 12px; border: 2px solid #C9C3B7; background: #FFFFFF; color: #111C24; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
 .btn-menu .icon-close { display: none; }
@@ -266,7 +270,7 @@ a:hover { color: #9E3E15; }
 .bot-tagline { margin: 0; font-size: 18px; line-height: 1.45; color: #3A4650; }
 .bot-asks { display: flex; flex-direction: column; gap: 8px; }
 .bot-asks[hidden], .bot-tagline[hidden], .control-note[hidden] { display: none !important; }
-.bot-asks-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: #8C8A85; }
+.bot-asks-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: #B94A1B; }
 .bot-asks-list { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 .bot-ask { max-width: 92%; background: #E8E6E1; color: #111C24; border-radius: 18px 18px 4px 18px; padding: 10px 14px; font-size: 15px; line-height: 1.4; text-align: left; }
 .check-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 17px; line-height: 1.5; color: #3A4650; }
@@ -603,6 +607,8 @@ html { scroll-padding-top: 80px; }
   }
   .btn-secondary:hover { box-shadow: 0 5px 0 #C9C3B7, 0 12px 24px -12px rgba(17,28,36,.25); border-color: #BDB6A8; }
   .btn-light:hover { box-shadow: 0 5px 0 #8B979F, 0 12px 24px -12px rgba(0,0,0,.35); }
+  .btn-go:hover { box-shadow: 0 5px 0 #134B3C, 0 12px 24px -12px rgba(29,106,85,.55); }
+  .btn-gold:hover { box-shadow: 0 5px 0 #A97F2C, 0 12px 24px -12px rgba(227,176,75,.6); }
   .btn-menu:hover { border-color: #B94A1B; }
   .btn-linkedin:hover { transform: translateY(-1px); }
   .chip:hover { border-color: #B94A1B; }
@@ -828,19 +834,19 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
         <li><span class="check">✓</span>Connected to the tools you already use</li>
         <li><span class="check">✓</span>A walkthrough so your team knows how to use it</li>
       </ul>
-      <div class="way-foot"><span class="way-price">Priced per bot</span><a class="btn btn-secondary btn-way" href="#bots">See the bots</a></div>
+      <div class="way-foot"><span class="way-price">Priced per bot</span><a class="btn btn-go btn-way" href="#bots">See the bots</a></div>
     </div>
     <div class="way way-build">
       <span class="way-kicker">03 · BUILD</span>
       <h3>Custom AI crew</h3>
-      <p>I get into the details of your business and build agents around the way it runs.</p>
+      <p>I get into the details of how you work and build agents around it.</p>
       <ul class="check-list">
         <li><span class="check check-on-dark">✓</span>A deep-dive on your systems and processes with you and your team</li>
         <li><span class="check check-on-dark">✓</span>One custom agent, or a “Krew” that works together</li>
         <li><span class="check check-on-dark">✓</span>Connected to your CRM, email, calendar, docs, and other programs</li>
         <li><span class="check check-on-dark">✓</span>Ongoing tune-ups available as your business changes</li>
       </ul>
-      <div class="way-foot"><span class="way-price">Starts at $5,000</span><a class="btn btn-light btn-way" href="#demo">Talk it through</a></div>
+      <div class="way-foot"><span class="way-price">Starts at $5,000</span><a class="btn btn-gold btn-way" href="#demo">Let’s talk</a></div>
     </div>
   </div>
 </section>
