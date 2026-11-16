@@ -240,6 +240,7 @@ a:hover { color: #9E3E15; }
 .phone { width: 290px; height: 600px; border-radius: 46px; background: #111C24; padding: 10px; box-sizing: border-box; box-shadow: 0 24px 50px rgba(17, 28, 36, 0.2); }
 .phone-screen { position: relative; width: 100%; height: 100%; border-radius: 37px; overflow: hidden; background: #1F2C35; }
 .phone-screen img, .phone-screen video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.phone-screen video.fit-full { object-fit: contain; background: #000; }
 .vid-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 28px; text-align: center; color: #F6F4EF; }
 .vid-ph-icon { width: 60px; height: 60px; border-radius: 18px; border: 2px dashed #E07A4A; display: flex; align-items: center; justify-content: center; }
 .vid-ph-name { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; }
@@ -375,6 +376,8 @@ a:hover { color: #9E3E15; }
 .footer-brand p { margin: 0; max-width: 420px; line-height: 1.6; }
 .footer-lead { font-size: 17px; line-height: 1.55; color: #F6F4EF; }
 .footer-note { font-size: 14px; }
+.footer-credit { font-size: 12px; opacity: 0.7; }
+.footer-credit a { color: inherit; text-decoration: underline; }
 .footer-nav, .footer-contact { flex: 1 1 180px; display: flex; flex-direction: column; gap: 12px; font-size: 16px; }
 .footer-kicker { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: #E9A27F; }
 .footer-nav a { color: #F6F4EF; text-decoration: none; }
@@ -934,6 +937,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
       <p class="footer-lead">AI education and automation for small businesses. I’ll teach you to use it, or build it for you.</p>
       <p class="footer-note">Every email, note, and report your bots draft is reviewed and approved by you before it goes to a customer.</p>
       <p class="footer-note">Based in Ojai, California. Serving small businesses across Ventura, Santa Barbara and Los Angeles counties, in person or remote.</p>
+      <p class="footer-note footer-credit">Music in the CRM Assistant demo: “Smooth Lovin” Kevin MacLeod (<a href="https://incompetech.com" target="_blank" rel="noopener">incompetech.com</a>), licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons: By Attribution 4.0 License</a>.</p>
     </div>
     <nav class="footer-nav footer-nav-d" aria-label="Footer">
       <div class="footer-kicker">NAVIGATION</div>
@@ -981,7 +985,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
   };
 
   var NOTE_DEFAULT = '<strong>You stay in control.</strong> It drafts. You approve before anything reaches a client.';
-  var CRM = { name: 'CRM Assistant', line: 'Keeps your CRM current without the data entry.',
+  var CRM = { name: 'CRM Assistant', line: 'Keeps your CRM current without the data entry.', video: '/assets/crm-demo.mp4', poster: '/assets/crm-poster.jpg', fit: 'full',
     tagline: 'Your client database, one message away.',
     does: ['Find contacts and client information instantly', 'Add new contacts and update existing records', 'Search your database using everyday language', 'Draft individual or group emails'],
     note: '<strong>You stay in control.</strong> Your assistant handles the busywork while you focus on your clients.',
@@ -997,7 +1001,7 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
   var TABS = [
     { id: 're', label: 'Real estate', icon: 'house', products: [ CRM, SCHED, BRIEF ] },
     { id: 'trades', label: 'Contractors', icon: 'tools', products: [
-      { name: 'Inspection-to-Proposal', line: 'Your walkthrough becomes a report and a bid.', video: true,
+      { name: 'Inspection-to-Proposal', line: 'Your walkthrough becomes a report and a bid.', video: '/assets/hero-demo.mp4', poster: '/assets/hero-poster.jpg',
         does: ['Turns your on-site talk-through and photos into a report', 'Adds recommendations and pricing from your price sheet', 'Hands you a PDF and an email draft to send yourself'],
         note: NOTE_DEFAULT } ] },
     { id: 'all', soon: true, label: 'Every business', icon: 'store', products: [ BRIEF,
@@ -1149,6 +1153,8 @@ html.js-ready .reveal.is-in { opacity: 1; translate: 0; }
       placeholder.style.display = 'none';
       document.getElementById('phone-screen').classList.remove('no-video');
       poster.style.display = 'none';
+      if (video.getAttribute('src') !== p.video) { video.setAttribute('poster', p.poster || ''); video.setAttribute('src', p.video); video.load(); }
+      video.classList.toggle('fit-full', p.fit === 'full');
       video.style.display = 'block';
       video.muted = true;
       setMuted(true);
